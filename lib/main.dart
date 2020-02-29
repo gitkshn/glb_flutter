@@ -36,16 +36,15 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
 
-  void _incrementCounter() {
+  void _addNewExercise() {
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
       // so that the display can reflect the updated values. If we changed
       // _counter without calling setState(), then the build method would not be
       // called again, and so nothing would appear to happen.
-      _counter++;
+      
     });
   }
 
@@ -55,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       appBar: AppBar(
       
-        title: Text(AppLocalizations.of(context).appBarTitle),
+        title: Text(AppLocalizations.of(context).appBarTitle + ' extra string'),
       ),
       body: Center(
         // Center is a layout widget. It takes a single child and positions it
@@ -63,11 +62,13 @@ class _MyHomePageState extends State<MyHomePage> {
         child: Text(AppLocalizations.of(context).testTitle),
         //child: Text(AppLocalizations.getLocale(context)),
       ),
+      /*
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
+        onPressed: _addNewExercise(),
+        tooltip: 'Add ',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
+      */ // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
 }
