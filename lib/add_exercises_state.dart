@@ -4,12 +4,28 @@ import 'main.dart';
 import 'training_utility/exercise.dart';
 import 'training_utility/exercise_list.dart';
 
-class AddExercisesState extends State<MyHomePage> {
-  void _pushSaved() {
+class AddExercisesState extends State<HomePage> {
+  
+  @override                                 
+  Widget build(BuildContext context) {
+    return Scaffold (appBar: AppBar(
+      title: Text('Add your exercises'),
+      actions: <Widget>[
+        IconButton(
+          //the "next" icon
+          icon: Icon(Icons.send), 
+          onPressed: _pushChosenExercises),
+      ],
+    ),
+    body: _buildExerciseSuggestions(),
+    );
+  }
+  
+  void _pushChosenExercises() {
     Navigator.of(context).push(
       MaterialPageRoute<void>(
         builder: (BuildContext context) {
-          final Iterable<ListTile> tiles = _saved.map(
+          final Iterable<ListTile> tiles = _chosenExercises.map(
             (Exercise exercise) {
               return ListTile(
                 title: Text(
@@ -38,67 +54,42 @@ class AddExercisesState extends State<MyHomePage> {
       ),
     );
   }
+
   static ExerciseList exerciseList = new ExerciseList(); 
-  final List<Exercise> _suggestions = exerciseList.getExercises();
-  final Set<Exercise> _saved = Set<Exercise>();
+  final List<Exercise> _exerciseSuggestions = exerciseList.getExercises();
+  final Set<Exercise> _chosenExercises = Set<Exercise>();
   final TextStyle _biggerFont = const TextStyle(fontSize: 18);
 
-  
-
-  void _addNewExercise() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      
-    });
-  }
-
-   Widget _buildSuggestions() {
+   Widget _buildExerciseSuggestions() {
     return ListView.builder(
       padding: const EdgeInsets.all(16),
-      itemCount: _suggestions.length,
+      itemCount: _exerciseSuggestions.length,
       itemBuilder: (BuildContext _context, int i) {
         
-        return _buildRow(_suggestions[i]);
+        return _buildRow(_exerciseSuggestions[i]);
       }
     );
   }
   Widget _buildRow(Exercise exercise) {
-    final bool alreadySaved = _saved.contains(exercise);
+    final bool isExerciseAlreadySaved = _chosenExercises.contains(exercise);
     return ListTile(
       title: Text(
         exercise.name,
         style: _biggerFont,
       ),
       trailing: Icon(
-        alreadySaved ? Icons.add_box : Icons.add_box,
-        color: alreadySaved ? Colors.red : null,
+        isExerciseAlreadySaved ? Icons.check : Icons.add_box,
+        color: isExerciseAlreadySaved ? Colors.red : null,
       ),
       onTap: () {
         setState(() {
-          if (alreadySaved) {
-            _saved.remove(exercise);
+          if (isExerciseAlreadySaved) {
+            _chosenExercises.remove(exercise);
           } else {
-            _saved.add(exercise);
+            _chosenExercises.add(exercise);
           }
         });
       },
-    );
-  }
-
-
-  @override                                 
-  Widget build(BuildContext context) {
-    return Scaffold (appBar: AppBar(
-      title: Text('Add your exercises'),
-      actions: <Widget>[
-        IconButton(icon: Icon(Icons.send), onPressed: _pushSaved),
-      ],
-    ),
-    body: _buildSuggestions(),
     );
   }
 }

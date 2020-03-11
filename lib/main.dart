@@ -27,13 +27,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueAccent[300],
       ),
-      home: MyHomePage(),
+      home: HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
