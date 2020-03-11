@@ -38,7 +38,7 @@ class HomePage extends StatefulWidget {
   final String title;
 
   @override
-  //_AddExercisesState createState() => _AddExercisesState();
   AddExercisesState createState() => AddExercisesState();
+  
 }
 
