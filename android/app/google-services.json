@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "290753041919",
+    "firebase_url": "https://gains-log-book.firebaseio.com",
+    "project_id": "gains-log-book",
+    "storage_bucket": "gains-log-book.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:290753041919:android:bad6c396178ad152a2c3ca",
+        "android_client_info": {
+          "package_name": "com.example.training_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "290753041919-2g25mvbdkfanmooo0hnus9ermgt3voq0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAofwSyMt4iSLn3MVEO8QaYSCC7FrVNMnY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "290753041919-2g25mvbdkfanmooo0hnus9ermgt3voq0.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

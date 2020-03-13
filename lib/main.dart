@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'localization/localization.dart';
 
+import 'package:training_app/add_exercises_state.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -20,55 +23,20 @@ class MyApp extends StatelessWidget {
         const Locale('dk', ''),
       ],
       theme: ThemeData(
+        primaryColor: Colors.blueAccent[300],
       ),
-      home: MyHomePage(),
+      home: HomePage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+class HomePage extends StatefulWidget {
+  HomePage({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  AddExercisesState createState() => AddExercisesState();
+  
 }
 
-class _MyHomePageState extends State<MyHomePage> {
-
-  void _addNewExercise() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    
-    return Scaffold(
-      appBar: AppBar(
-      
-        title: Text(AppLocalizations.of(context).appBarTitle + ' extra string'),
-      ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
-        child: Text(AppLocalizations.of(context).testTitle),
-        //child: Text(AppLocalizations.getLocale(context)),
-      ),
-      /*
-      floatingActionButton: FloatingActionButton(
-        onPressed: _addNewExercise(),
-        tooltip: 'Add ',
-        child: Icon(Icons.add),
-      ),
-      */ // This trailing comma makes auto-formatting nicer for build methods.
-    );
-  }
-}
