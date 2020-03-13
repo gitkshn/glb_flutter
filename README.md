@@ -1,16 +1,22 @@
-# training_app
+# Gains Log Book
 
-A new Flutter project.
+App for tracking exercise sessions. 
 
-## Getting Started
+0. (Login Page).
+1. Choose exercises from list.
+2. Add chosen exercises to an exercise session.
+3. Note reps, sets, weight used.
+4. Lookup previous exercise sessions. 
+5. Progress in graph.
 
-This project is a starting point for a Flutter application.
+Minor hobby project experimenting with flutter.
 
-A few resources to get you started if this is your first Flutter project:
+## Progress
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+At step 2. Firebase database is recently implemented.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Notes
+
+* Flutter +1.17
+* Channel: Beta
+* Firebase, CloudStore Database
