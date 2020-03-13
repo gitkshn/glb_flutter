@@ -3,8 +3,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'localization/localization.dart';
 
 import 'package:training_app/add_exercises_state.dart';
-import 'package:training_app/training_utility/exercise.dart';
-import 'package:training_app/training_utility/exercise_list.dart';
 
 void main() => runApp(MyApp());
 
