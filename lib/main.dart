@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
+import 'package:training_app/backend/login_page.dart';
 import 'localization/localization.dart';
-
-import 'package:training_app/add_exercises_state.dart';
 
 void main() => runApp(MyApp());
 
@@ -25,18 +24,12 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueAccent[300],
       ),
-      home: HomePage(),
+      //this is the normal code for adding an exercise, might have to refactor name
+      //home: HomePage(),
+      home: LoginPage(),
     );
   }
 }
 
-class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
 
-  final String title;
-
-  @override
-  AddExercisesState createState() => AddExercisesState();
-  
-}
 
