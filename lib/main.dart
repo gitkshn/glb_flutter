@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:training_app/backend/login_page.dart';
+import 'package:training_app/pages/add_exercises_state.dart';
 import 'localization/localization.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(InitApp());
 
-class MyApp extends StatelessWidget {
+class InitApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
@@ -24,9 +25,10 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primaryColor: Colors.blueAccent[300],
       ),
-      //this is the normal code for adding an exercise, might have to refactor name
-      //home: HomePage(),
+      //TODO: add login navigation here if the user is already logged in on device.
       home: LoginPage(),
+      //home: AddExercisesPage(),
+      
     );
   }
 }

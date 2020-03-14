@@ -15,16 +15,15 @@ class AddExercisesPage extends StatefulWidget {
   _AddExercisesState createState() => _AddExercisesState();
 }
 
+
+
 class _AddExercisesState extends State<AddExercisesPage> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        //grabs the text before the @ in the email and appends it to the title.
-        title: Text(widget.title +
-            " " +
-            widget.signedInUser.email
-                .substring(0, widget.signedInUser.email.indexOf('@'))),
+        title: Text(widget.title),
         actions: <Widget>[
           IconButton(
               //the "next" icon
@@ -77,7 +76,8 @@ class _AddExercisesState extends State<AddExercisesPage> {
 
   Widget _buildExerciseSuggestions() {
     return ListView.builder(
-        padding: const EdgeInsets.all(16),
+        //padding for an individual tile
+        padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
         itemCount: _exerciseSuggestions.length,
         itemBuilder: (BuildContext _context, int i) {
           return _buildRow(_exerciseSuggestions[i]);
@@ -87,10 +87,14 @@ class _AddExercisesState extends State<AddExercisesPage> {
   Widget _buildRow(Exercise exercise) {
     final bool isExerciseAlreadySaved = _chosenExercises.contains(exercise);
     return ListTile(
+      //TODO: Add leading icon here which indicates muscle groups. Ex Leading: Iocns(Icons.<CUSTOMI_ICON>)
+      //https://medium.com/@suragch/a-complete-guide-to-flutters-listtile-597a20a3d449
+      //main tekst på tile
       title: Text(
         exercise.name,
         style: _biggerFont,
       ),
+      //icon der kommer efter tekst
       trailing: Icon(
         isExerciseAlreadySaved ? Icons.check : Icons.add_box,
         color: isExerciseAlreadySaved ? Colors.red : null,
@@ -104,6 +108,8 @@ class _AddExercisesState extends State<AddExercisesPage> {
           }
         });
       },
+      //Makes the tile more compact.
+      dense: true,
     );
   }
 }

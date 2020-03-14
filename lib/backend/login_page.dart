@@ -75,7 +75,7 @@ class _LoginPageState extends State<LoginPage> {
             context,
             MaterialPageRoute(
                 builder: (context) => AddExercisesPage(
-                      title: AppLocalizations.of(context).welcome,
+                      title: AppLocalizations.of(context).welcome + ' ' + shortEmailName(_authResult.user),
                       signedInUser: _authResult.user,
                     )));
       } catch (e) {
@@ -83,4 +83,11 @@ class _LoginPageState extends State<LoginPage> {
       }
     }
   }
+
+  //grabs the text before the @ in the email and appends it to the title. Normally the user name should be displayed!
+  String shortEmailName(FirebaseUser signedInUser) {
+    return signedInUser.email.substring(0, signedInUser.email.indexOf('@'));
+  }
+
 }
+  
