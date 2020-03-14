@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:training_app/localization/localization.dart';
 import 'package:training_app/pages/add_exercises_state.dart';
+import 'package:training_app/pages/db_test.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -71,13 +72,10 @@ class _LoginPageState extends State<LoginPage> {
             .signInWithEmailAndPassword(email: _email, password: _password));
         //redirects to the random homepage in home.dart, delete this.
         //Navigator.push(context, MaterialPageRoute(builder: (context) => Home(currentUser: user,)));
-        Navigator.pushReplacement(
+        Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => AddExercisesPage(
-                      title: AppLocalizations.of(context).welcome + ' ' + shortEmailName(_authResult.user),
-                      signedInUser: _authResult.user,
-                    )));
+                builder: (context) => Home(user: _authResult.user)));
       } catch (e) {
         print('Login Failed: ' + e.toString());
       }
