@@ -13,11 +13,14 @@ class Home extends StatelessWidget {
         title: Text('Home ${user.email}'),
       ),
       body: StreamBuilder<DocumentSnapshot>(
+        //user.uid producerer en null value hvis du ikke logger ind, jeg tror godt du kan hardcode uid ind.
         stream: Firestore.instance.collection('users').document(user.uid).snapshots(),
         builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
           if (snapshot.hasError) {
+            //' ${} ' kaldes for string interpolation. Dette gør at du ikke behøver at lave + omkring flere strenge!
             return Text('Error: ${snapshot.error}');
           }
+          //der er andre cases såsom: active, done, none, waiting i switch casen.
           switch(snapshot.connectionState){
             case ConnectionState.waiting: return Text('Loading..');
             default: 
@@ -29,6 +32,7 @@ class Home extends StatelessWidget {
     );
   }
   Center checkRole(DocumentSnapshot snapshot) {
+    //documentsnapshot er vist den enkelte fil. Du kan vist også bruge path i stedet for 'role' etc. du kan finde path i db interface på fb console.
     if (snapshot.data['role'] == 'admin') {
       return adminPage(snapshot);
     } else {
