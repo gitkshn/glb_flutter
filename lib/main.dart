@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      onGenerateTitle: (BuildContext context) => AppLocalizations.of(context).appBarTitle,
+      onGenerateTitle: (BuildContext context) => AppLocalizations.of(context).gainsLogBook,
       localizationsDelegates: [
         const AppLocalizationsDelegate(), 
         GlobalMaterialLocalizations.delegate,

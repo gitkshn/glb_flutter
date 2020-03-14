@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:training_app/pages/home.dart';
+import 'package:training_app/localization/localization.dart';
 import 'package:training_app/add_exercises_state.dart';
 
 class LoginPage extends StatefulWidget {
@@ -14,43 +14,47 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext buildContext) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('sign in'),
+        title: Text(AppLocalizations.of(buildContext).signIn),
       ),
       body: Form(
           key: _formKey,
           child: Column(
             children: <Widget>[
+              //The email field
               TextFormField(
                 validator: (input) {
                   if (input.isEmpty || !input.contains('@')) {
-                    return 'Please type an email';
+                    return AppLocalizations.of(buildContext).typeValidEmail;
                   }
-                  return 'Email not found';
+                  return null;
                 },
                 onSaved: (input) => _email = input,
                 decoration: InputDecoration(
-                    labelText: 'Email', 
+                    labelText: AppLocalizations.of(buildContext).email,
                     contentPadding: EdgeInsets.all(10)),
               ),
+              //The password field
               TextFormField(
                 validator: (input) {
                   if (input.length < 6) {
-                    return 'Please provide a password above 6 characters';
+                    return AppLocalizations.of(buildContext).invalidPassword;
                   }
-                  return 'Password does not match with email';
+                  return null;
                 },
                 onSaved: (input) => _password = input,
                 decoration: InputDecoration(
-                    labelText: 'Password',
+                    labelText: AppLocalizations.of(buildContext).password,
                     contentPadding: const EdgeInsets.all(10)),
                 obscureText: true,
               ),
               RaisedButton(
-                onPressed: () => signIn(),
-                child: Text('Sign in'),
+                onPressed: () {
+                  signIn();
+                },
+                child: Text(AppLocalizations.of(buildContext).signIn),
               )
             ],
           )),
@@ -63,18 +67,19 @@ class _LoginPageState extends State<LoginPage> {
       //retrieves the email and password field as a child of formstate
       formState.save();
       try {
-        AuthResult user = (await FirebaseAuth.instance
+        AuthResult _authResult = (await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: _email, password: _password));
         //redirects to the random homepage in home.dart, delete this.
         //Navigator.push(context, MaterialPageRoute(builder: (context) => Home(currentUser: user,)));
         Navigator.push(
             context,
             MaterialPageRoute(
-                builder: (context) => HomePage(
-                      title: 'welcome ' + user.user.email,
+                builder: (context) => AddExercisesPage(
+                      title: AppLocalizations.of(context).welcome,
+                      signedInUser: _authResult.user,
                     )));
       } catch (e) {
-        print(e.toString());
+        print('Login Failed: ' + e.toString());
       }
     }
   }

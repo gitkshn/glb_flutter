@@ -1,23 +1,29 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:training_app/localization/localization.dart';
 import 'training_utility/exercise.dart';
 import 'training_utility/exercise_list.dart';
 
-//TODO: rename homepage to something more relatable
-class HomePage extends StatefulWidget {
-  HomePage({Key key, this.title}) : super(key: key);
+class AddExercisesPage extends StatefulWidget {
+  AddExercisesPage({Key key, this.title, this.signedInUser}) : super(key: key);
 
   final String title;
+  final FirebaseUser signedInUser;
 
   @override
-  AddExercisesState createState() => AddExercisesState();
+  _AddExercisesState createState() => _AddExercisesState();
 }
 
-class AddExercisesState extends State<HomePage> {
+class _AddExercisesState extends State<AddExercisesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Add your exercises'),
+        //grabs the text before the @ in the email and appends it to the title.
+        title: Text(widget.title +
+            " " +
+            widget.signedInUser.email
+                .substring(0, widget.signedInUser.email.indexOf('@'))),
         actions: <Widget>[
           IconButton(
               //the "next" icon
@@ -50,7 +56,8 @@ class AddExercisesState extends State<HomePage> {
 
           return Scaffold(
             appBar: AppBar(
-              title: Text('Chosen Exercises ' +
+              title: Text(AppLocalizations.of(context).chosenExercises +
+                  ' ' +
                   DateTime.now().day.toString() +
                   '/' +
                   DateTime.now().month.toString()),
