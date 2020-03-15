@@ -27,8 +27,8 @@ class InitApp extends StatelessWidget {
         primaryColor: Colors.blueAccent[300],
       ),
       //TODO: add login navigation here if the user is already logged in on device.
-      home: LoginPage(),
-      //home: AddExercisesPage(),
+      //home: LoginPage(),
+      home: AddExercisesPage(title: 'No user login',),
       
     );
   }

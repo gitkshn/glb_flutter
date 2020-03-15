@@ -72,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
             .signInWithEmailAndPassword(email: _email, password: _password));
         //redirects to the random homepage in home.dart, delete this.
         //Navigator.push(context, MaterialPageRoute(builder: (context) => Home(currentUser: user,)));
-        Navigator.push(
+        Navigator.pushReplacement(
             context,
             MaterialPageRoute(
                 builder: (context) => Home(user: _authResult.user)));

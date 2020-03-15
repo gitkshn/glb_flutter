@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:training_app/localization/localization.dart';
@@ -18,7 +19,6 @@ class AddExercisesPage extends StatefulWidget {
 
 
 class _AddExercisesState extends State<AddExercisesPage> {
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -69,10 +69,12 @@ class _AddExercisesState extends State<AddExercisesPage> {
     );
   }
 
-  static ExerciseList exerciseList = new ExerciseList();
-  final List<Exercise> _exerciseSuggestions = exerciseList.getExercises();
+  
   final Set<Exercise> _chosenExercises = Set<Exercise>();
   final TextStyle _biggerFont = const TextStyle(fontSize: 18);
+  //her retriever vi hardcoded data
+  static ExerciseList exerciseList = new ExerciseList();
+  final List<Exercise> _exerciseSuggestions = exerciseList.getExercises();
 
   Widget _buildExerciseSuggestions() {
     return ListView.builder(
