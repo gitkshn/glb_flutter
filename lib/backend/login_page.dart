@@ -6,6 +6,11 @@ import 'package:training_app/pages/add_exercises_state.dart';
 import 'package:training_app/pages/db_test.dart';
 
 class LoginPage extends StatefulWidget {
+  LoginPage({
+    Key key,
+  }) : super(key: key);
+
+
   @override
   _LoginPageState createState() => new _LoginPageState();
 }
@@ -56,6 +61,9 @@ class _LoginPageState extends State<LoginPage> {
                   signIn();
                 },
                 child: Text(AppLocalizations.of(buildContext).signIn),
+                onLongPress: () {
+                  signInWithDefaultCredentials();
+                },
               )
             ],
           )),
@@ -64,18 +72,20 @@ class _LoginPageState extends State<LoginPage> {
 
   Future<void> signIn() async {
     final formState = _formKey.currentState;
+
     if (formState.validate()) {
       //retrieves the email and password field as a child of formstate
       formState.save();
       try {
         AuthResult _authResult = (await FirebaseAuth.instance
             .signInWithEmailAndPassword(email: _email, password: _password));
-        //redirects to the random homepage in home.dart, delete this.
-        //Navigator.push(context, MaterialPageRoute(builder: (context) => Home(currentUser: user,)));
+
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-                builder: (context) => Home(user: _authResult.user)));
+                builder: (context) => AddExercisesPage(
+                      signedInUser: _authResult.user,
+                    )));
       } catch (e) {
         print('Login Failed: ' + e.toString());
       }
@@ -87,5 +97,22 @@ class _LoginPageState extends State<LoginPage> {
     return signedInUser.email.substring(0, signedInUser.email.indexOf('@'));
   }
 
+  //delete this later. This logins the default user on a long press on the sign in button.
+  Future<void> signInWithDefaultCredentials() async {
+    final String _email = 'default@gmail.com';
+    final String _password = 'defaultpassword';
+
+    try {
+      AuthResult _authResult = await FirebaseAuth.instance
+          .signInWithEmailAndPassword(email: _email, password: _password);
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => AddExercisesPage(
+                    signedInUser: _authResult.user,
+                  )));
+    } catch (e) {
+      print('Automatic login failed: ${e.toString()}');
+    }
+  }
 }
-  

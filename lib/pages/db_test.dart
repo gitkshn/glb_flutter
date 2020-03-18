@@ -40,7 +40,7 @@ class Home extends StatelessWidget {
       return Center(child: Text('this bitch empty')) ;
     } else {
       
-      return Center(child: Text(snapshot.documents.elementAt(3).data['name'] + ' with size of docu: '+ snapshot.documents.length.toString()));
+      return Center(child: Text(snapshot.documents.elementAt(2).data['name'] + ' with size of docu: '+ snapshot.documents.length.toString()));
       
     }
   }

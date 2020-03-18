@@ -5,9 +5,12 @@ import 'package:training_app/localization/localization.dart';
 import 'package:training_app/training_utility/exercise.dart';
 import 'package:training_app/training_utility/exercise_list.dart';
 
-
 class AddExercisesPage extends StatefulWidget {
-  AddExercisesPage({Key key, this.title, this.signedInUser}) : super(key: key);
+  AddExercisesPage({
+    Key key,
+    this.title,
+    this.signedInUser,
+  }) : super(key: key);
 
   final String title;
   final FirebaseUser signedInUser;
@@ -16,14 +19,13 @@ class AddExercisesPage extends StatefulWidget {
   _AddExercisesState createState() => _AddExercisesState();
 }
 
-
-
 class _AddExercisesState extends State<AddExercisesPage> {
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(widget.signedInUser.email.substring(0, widget.signedInUser.email.indexOf('@'))),
         actions: <Widget>[
           IconButton(
               //the "next" icon
@@ -69,7 +71,6 @@ class _AddExercisesState extends State<AddExercisesPage> {
     );
   }
 
-  
   final Set<Exercise> _chosenExercises = Set<Exercise>();
   final TextStyle _biggerFont = const TextStyle(fontSize: 18);
   //her retriever vi hardcoded data

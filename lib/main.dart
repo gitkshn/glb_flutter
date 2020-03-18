@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:training_app/backend/login_page.dart';
@@ -27,11 +28,13 @@ class InitApp extends StatelessWidget {
         primaryColor: Colors.blueAccent[300],
       ),
       //TODO: add login navigation here if the user is already logged in on device.
-      //home: LoginPage(),
-      home: AddExercisesPage(title: 'No user login',),
+      home: LoginPage(),
+      //home: AddExercisesPage(title: 'No user login',),
       
     );
   }
+
+  
 }
 
 
