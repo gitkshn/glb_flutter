@@ -3,7 +3,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:training_app/localization/localization.dart';
 import 'package:training_app/training_utility/exercise.dart';
-import 'package:training_app/training_utility/exercise_list.dart';
 
 class AddExercisesPage extends StatefulWidget {
   AddExercisesPage({

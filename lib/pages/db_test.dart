@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:training_app/training_utility/exercise.dart';
 
 class Home extends StatelessWidget {
   const Home({Key key, this.user,}) : super(key: key);
