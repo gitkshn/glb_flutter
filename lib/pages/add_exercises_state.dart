@@ -35,35 +35,19 @@ class _AddExercisesState extends State<AddExercisesPage> {
         ],
       ),
       body: StreamBuilder<QuerySnapshot>(
-        stream: db.collection('users').snapshots(),
+        stream: db.collection('exercises').snapshots(),
         builder: (context, snapshot) {
           if (snapshot.hasData) {
-            retrieveData();
-            return _buildExerciseSuggestions();
+            //retrieveData();
+            return _buildExerciseSuggestions(snapshot.data.documents);
           }
           else {
-            return SizedBox();
+            // TODO: Make an proper error. Navigate to some error screen!
+            return SizedBox(child: Text('Could not find any data on database!'), );
           }
         },
       )    
-      //_buildExerciseSuggestions(),
     );
-  }
-
-  void retrieveData() async {
-    //retrieves the name of a document with the id=VwIN...)
-    DocumentSnapshot snapshotDB_deadlift = await db.collection('exercises').document('VwINRoffQ4UwHp7Q96hf').get();
-    print(snapshotDB_deadlift.data['name']);
-    
-    //retrieves all documents that is contained in 'exercises'
-    QuerySnapshot snapshots = await db.collection('exercises').getDocuments();
-    for (DocumentSnapshot snapshot in snapshots.documents) {
-      print(snapshot.data['name']);
-    }
-    
-
-
-    
   }
 
   void _pushChosenExercises() {
@@ -103,25 +87,22 @@ class _AddExercisesState extends State<AddExercisesPage> {
 
   final Set<Exercise> _chosenExercises = Set<Exercise>();
   final TextStyle _biggerFont = const TextStyle(fontSize: 18);
-  //her retriever vi hardcoded data
-  static ExerciseList exerciseList = new ExerciseList();
-  final List<Exercise> _exerciseSuggestions = exerciseList.getExercises();
 
-  Widget _buildExerciseSuggestions() {
-
-
+  Widget _buildExerciseSuggestions(List<DocumentSnapshot> _documentSnapshots) {
     return ListView.builder(
       //padding for an individual tile
       padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
-      itemCount: _exerciseSuggestions.length,
+      itemCount: _documentSnapshots.length,
       itemBuilder: (BuildContext _context, int i) {
-        return _buildRow(_exerciseSuggestions[i]);
+        return _buildRow(_documentSnapshots[i]);
       }
     );
   }
 
-  Widget _buildRow(Exercise exercise) {
+  Widget _buildRow(DocumentSnapshot snapshot) {
+    Exercise exercise = Exercise(name: snapshot.data['name']);
     final bool isExerciseAlreadySaved = _chosenExercises.contains(exercise);
+    
     return ListTile(
       //TODO: Add leading icon here which indicates muscle groups. Ex Leading: Iocns(Icons.<CUSTOMI_ICON>)
       //https://medium.com/@suragch/a-complete-guide-to-flutters-listtile-597a20a3d449

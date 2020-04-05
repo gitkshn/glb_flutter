@@ -13,6 +13,23 @@ class Exercise {
 
   });
    
+  
+  // EQUALS OVERRIDE
+  // https://stackoverflow.com/questions/29567322/how-does-a-set-determine-that-two-objects-are-equal-in-dart
+  @override
+  bool operator==(other) {
+    if(other is! Exercise) {
+      return false;
+    }
+    return name == (other).name;
+  }
 
-
+  int _hashCode;
+  @override
+  int get hashCode {
+    if(_hashCode == null) {
+      _hashCode = name.hashCode;
+    }
+    return _hashCode;
+  }
 }
