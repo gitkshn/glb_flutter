@@ -64,6 +64,8 @@ class FirestoreCRUDPageState extends State<FirestoreCRUDPage> {
       validator: (value) {
         if (value.isEmpty) {
           return 'Please enter some text';
+        } else {
+          return null;
         }
       },
       onSaved: (value) => name = value,
