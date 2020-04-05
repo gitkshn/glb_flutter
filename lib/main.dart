@@ -4,6 +4,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:training_app/backend/login_page.dart';
 import 'package:training_app/pages/add_exercises_state.dart';
 import 'package:training_app/pages/db_test.dart';
+import 'package:training_app/pages/db_crud.dart';
 import 'localization/localization.dart';
 
 void main() => runApp(InitApp());
