@@ -20,6 +20,7 @@ class AddExercisesPage extends StatefulWidget {
 }
 
 class _AddExercisesState extends State<AddExercisesPage> {
+  final db = Firestore.instance;
   
   @override
   Widget build(BuildContext context) {
@@ -33,8 +34,36 @@ class _AddExercisesState extends State<AddExercisesPage> {
               onPressed: _pushChosenExercises),
         ],
       ),
-      body: _buildExerciseSuggestions(),
+      body: StreamBuilder<QuerySnapshot>(
+        stream: db.collection('users').snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            retrieveData();
+            return _buildExerciseSuggestions();
+          }
+          else {
+            return SizedBox();
+          }
+        },
+      )    
+      //_buildExerciseSuggestions(),
     );
+  }
+
+  void retrieveData() async {
+    //retrieves the name of a document with the id=VwIN...)
+    DocumentSnapshot snapshotDB_deadlift = await db.collection('exercises').document('VwINRoffQ4UwHp7Q96hf').get();
+    print(snapshotDB_deadlift.data['name']);
+    
+    //retrieves all documents that is contained in 'exercises'
+    QuerySnapshot snapshots = await db.collection('exercises').getDocuments();
+    for (DocumentSnapshot snapshot in snapshots.documents) {
+      print(snapshot.data['name']);
+    }
+    
+
+
+    
   }
 
   void _pushChosenExercises() {
@@ -65,6 +94,7 @@ class _AddExercisesState extends State<AddExercisesPage> {
                   DateTime.now().month.toString()),
             ),
             body: ListView(children: divided),
+            
           );
         },
       ),
@@ -78,13 +108,16 @@ class _AddExercisesState extends State<AddExercisesPage> {
   final List<Exercise> _exerciseSuggestions = exerciseList.getExercises();
 
   Widget _buildExerciseSuggestions() {
+
+
     return ListView.builder(
-        //padding for an individual tile
-        padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
-        itemCount: _exerciseSuggestions.length,
-        itemBuilder: (BuildContext _context, int i) {
-          return _buildRow(_exerciseSuggestions[i]);
-        });
+      //padding for an individual tile
+      padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
+      itemCount: _exerciseSuggestions.length,
+      itemBuilder: (BuildContext _context, int i) {
+        return _buildRow(_exerciseSuggestions[i]);
+      }
+    );
   }
 
   Widget _buildRow(Exercise exercise) {
