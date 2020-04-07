@@ -23,7 +23,8 @@ class AppLocalizations {
       'typeValidEmail' : 'Please type an valid email',
       'invalidPassword' : 'The password must be above 6 characters',
       'welcome' : 'Welcome',
-      'chosenExercises' : 'Chosen exercises'
+      'chosenExercises' : 'Chosen exercises',
+      'dbExerciseList' : 'exercises',
     },
     'dk': {
       'gainsLogBook': 'Trænings App',
@@ -33,6 +34,9 @@ class AppLocalizations {
 
   static String getLocale(BuildContext context) {
     return Localizations.localeOf(context).toString();
+  }
+  String get dbExerciseList {
+    return _localizedValues[locale.languageCode]['dbExerciseList'];
   }
   
   String get gainsLogBook {
