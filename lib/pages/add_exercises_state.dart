@@ -43,6 +43,8 @@ class _AddExercisesState extends State<AddExercisesPage> {
               return _buildExerciseSuggestions(snapshot.data.documents);
             } else {
               // TODO: Make an proper error. Navigate to some error screen!
+              // as of now, 07.04.2020, this will display when loading the initial data retrieval.
+              // du kan måske lave en ny page der så poppes når at data retrieval er færdig.
               return SizedBox(
                 child: Text(
                   'Could not find any data on database: \n ${AppLocalizations.of(context).dbExerciseList}',
