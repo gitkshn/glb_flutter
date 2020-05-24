@@ -43,6 +43,7 @@ class _LoginPageState extends State<LoginPage> {
               ),
               //The password field
               TextFormField(
+                
                 validator: (input) {
                   if (input.length < 6) {
                     return AppLocalizations.of(buildContext).invalidPassword;

@@ -23,7 +23,7 @@ class AppLocalizations {
       'typeValidEmail' : 'Please type an valid email',
       'invalidPassword' : 'The password must be above 6 characters',
       'welcome' : 'Welcome',
-      'chosenExercises' : 'Chosen exercises',
+      'chosenExercises' : 'Session Overview:',
       'dbExerciseList' : 'exercises',
     },
     'dk': {

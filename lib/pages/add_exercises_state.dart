@@ -13,6 +13,7 @@ class AddExercisesPage extends StatefulWidget {
 
   final String title;
   final FirebaseUser signedInUser;
+  final String tempExercisePic = 'https://i.imgur.com/I5nZbhZ.jpg';
 
   @override
   _AddExercisesState createState() => _AddExercisesState();
@@ -25,12 +26,12 @@ class _AddExercisesState extends State<AddExercisesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(widget.signedInUser.email
+          title: Text('Welcome, ' + widget.signedInUser.email
               .substring(0, widget.signedInUser.email.indexOf('@'))),
           actions: <Widget>[
             IconButton(
-                //the "next" icon
-                icon: Icon(Icons.send),
+                // the "next" icon
+                icon: Icon(Icons.list),
                 onPressed: _pushChosenExercises),
           ],
         ),
@@ -63,6 +64,7 @@ class _AddExercisesState extends State<AddExercisesPage> {
           final Iterable<ListTile> tiles = _chosenExercises.map(
             (Exercise exercise) {
               return ListTile(
+                leading: CircleAvatar(backgroundImage: NetworkImage(widget.tempExercisePic)),
                 title: Text(
                   exercise.name,
                   style: _biggerFont,
@@ -77,11 +79,7 @@ class _AddExercisesState extends State<AddExercisesPage> {
 
           return Scaffold(
             appBar: AppBar(
-              title: Text(AppLocalizations.of(context).chosenExercises +
-                  ' ' +
-                  DateTime.now().day.toString() +
-                  '/' +
-                  DateTime.now().month.toString()),
+              title: Text('${AppLocalizations.of(context).chosenExercises} ${_getDateAndMonth()}'),
             ),
             body: ListView(children: divided),
           );
@@ -90,12 +88,16 @@ class _AddExercisesState extends State<AddExercisesPage> {
     );
   }
 
+  String _getDateAndMonth() {
+    return '${DateTime.now().day.toString()}/${DateTime.now().month}';
+  }
+
   final Set<Exercise> _chosenExercises = Set<Exercise>();
   final TextStyle _biggerFont = const TextStyle(fontSize: 18);
 
   Widget _buildExerciseSuggestions(List<DocumentSnapshot> _documentSnapshots) {
     return ListView.builder(
-        //padding for an individual tile
+        // padding for an individual tile
         padding: const EdgeInsets.fromLTRB(0, 8, 8, 8),
         itemCount: _documentSnapshots.length,
         itemBuilder: (BuildContext _context, int i) {
@@ -104,21 +106,23 @@ class _AddExercisesState extends State<AddExercisesPage> {
   }
 
   Widget _buildRow(DocumentSnapshot snapshot) {
-    //Exercise exercise = Exercise(name: snapshot.data['name']);
+    // Exercise exercise = Exercise(name: snapshot.data['name']);
     Exercise exercise = Exercise.fromDatabase(snapshot);
     final bool isExerciseAlreadySaved = _chosenExercises.contains(exercise);
 
     return ListTile(
-      //TODO: Add leading icon here which indicates muscle groups. Ex Leading: Iocns(Icons.<CUSTOMI_ICON>)
-      //https://medium.com/@suragch/a-complete-guide-to-flutters-listtile-597a20a3d449
-      //main tekst på tile
+      // TODO: Add leading icon here which indicates muscle groups. Ex Leading: Iocns(Icons.<CUSTOMI_ICON>)
+      // https://medium.com/@suragch/a-complete-guide-to-flutters-listtile-597a20a3d449
+      // should be replaced with pic from db
+      leading: CircleAvatar(backgroundImage: NetworkImage(widget.tempExercisePic)),
+      // main tekst på tile
       title: Text(
         exercise.name,
         style: _biggerFont,
       ),
-      //icon der kommer efter tekst
+      // icon der kommer efter tekst
       trailing: Icon(
-        isExerciseAlreadySaved ? Icons.check : Icons.add_box,
+        isExerciseAlreadySaved ? Icons.check : Icons.add,
         color: isExerciseAlreadySaved ? Colors.red : null,
       ),
       onTap: () {
@@ -130,7 +134,7 @@ class _AddExercisesState extends State<AddExercisesPage> {
           }
         });
       },
-      //Makes the tile more compact.
+      // Makes the tile more compact.
       dense: true,
     );
   }
