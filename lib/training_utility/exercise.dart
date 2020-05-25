@@ -14,11 +14,10 @@ class Exercise {
     this.sets,
   });
 
-  Exercise.fromDatabase(DocumentSnapshot snapshot):
-    name = snapshot.data['name'];
+  Exercise.fromDatabase(DocumentSnapshot snapshot, String fieldInDoc):
+    name = snapshot.data[fieldInDoc];
 
-  // EQUALS OVERRIDE
-  // https://stackoverflow.com/questions/29567322/how-does-a-set-determine-that-two-objects-are-equal-in-dart
+  // EQUALS OVERRIDE, only compares on name! add others as needed
   @override
   bool operator ==(other) {
     if (other is! Exercise) {

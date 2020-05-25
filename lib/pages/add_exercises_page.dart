@@ -26,11 +26,9 @@ class _AddExercisesState extends State<AddExercisesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Welcome, ' + widget.signedInUser.email
-              .substring(0, widget.signedInUser.email.indexOf('@'))),
+          title: Text('Welcome, ${_stripNameofEmail()}'),
           actions: <Widget>[
             IconButton(
-                // the "next" icon
                 icon: Icon(Icons.list),
                 onPressed: _pushChosenExercises),
           ],
@@ -44,7 +42,7 @@ class _AddExercisesState extends State<AddExercisesPage> {
               return _buildExerciseSuggestions(snapshot.data.documents);
             } else {
               // TODO: Make an proper error. Navigate to some error screen!
-              // as of now, 07.04.2020, this will display when loading the initial data retrieval.
+              // as of now, 07.04.2020, this will sometimes display when loading the initial data retrieval.
               // du kan måske lave en ny page der så poppes når at data retrieval er færdig.
               return SizedBox(
                 child: Text(
@@ -55,6 +53,10 @@ class _AddExercisesState extends State<AddExercisesPage> {
             }
           },
         ));
+  }
+
+  String _stripNameofEmail() {
+    return widget.signedInUser.email.substring(0, widget.signedInUser.email.indexOf('@'));
   }
 
   void _pushChosenExercises() {
@@ -106,21 +108,18 @@ class _AddExercisesState extends State<AddExercisesPage> {
   }
 
   Widget _buildRow(DocumentSnapshot snapshot) {
-    // Exercise exercise = Exercise(name: snapshot.data['name']);
-    Exercise exercise = Exercise.fromDatabase(snapshot);
+    Exercise exercise = Exercise.fromDatabase(snapshot, 'name');
     final bool isExerciseAlreadySaved = _chosenExercises.contains(exercise);
 
     return ListTile(
       // TODO: Add leading icon here which indicates muscle groups. Ex Leading: Iocns(Icons.<CUSTOMI_ICON>)
-      // https://medium.com/@suragch/a-complete-guide-to-flutters-listtile-597a20a3d449
-      // should be replaced with pic from db
       leading: CircleAvatar(backgroundImage: NetworkImage(widget.tempExercisePic)),
-      // main tekst på tile
+      // main text on tile
       title: Text(
         exercise.name,
         style: _biggerFont,
       ),
-      // icon der kommer efter tekst
+      // trailing icon for chosen exercises
       trailing: Icon(
         isExerciseAlreadySaved ? Icons.check : Icons.add,
         color: isExerciseAlreadySaved ? Colors.red : null,
