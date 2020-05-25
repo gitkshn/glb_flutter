@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:training_app/localization/localization.dart';
-import 'package:training_app/pages/add_exercises_state.dart';
+import 'package:training_app/pages/add_exercises_page.dart';
 
 class LoginPage extends StatefulWidget {
   LoginPage({

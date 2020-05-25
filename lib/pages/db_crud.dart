@@ -143,16 +143,13 @@ class FirestoreCRUDPageState extends State<FirestoreCRUDPage> {
     String todo;
     switch (randomNumber) {
       case 1:
-        todo = 'Like and subscribe 💩';
+        todo = ':slight_smile';
         break;
       case 2:
-        todo = 'Twitter @robertbrunhage 🤣';
-        break;
-      case 3:
-        todo = 'Patreon in the description 🤗';
+        todo = 'xd 🤣';
         break;
       default:
-        todo = 'Leave a comment 🤓';
+        todo = 'Lthanks for coming to my ted talk 🤓';
         break;
     }
     return todo;

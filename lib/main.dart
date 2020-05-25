@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
-import 'package:training_app/backend/login_page.dart';
+import 'package:training_app/pages/login_page.dart';
 import 'localization/localization.dart';
 
 void main() => runApp(InitApp());
