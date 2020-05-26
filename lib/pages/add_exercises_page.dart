@@ -36,6 +36,7 @@ class _AddExercisesState extends State<AddExercisesPage> {
         body: StreamBuilder<QuerySnapshot>(
           stream: db
               .collection(AppLocalizations.of(context).dbExerciseList)
+              .orderBy("name")
               .snapshots(),
           builder: (context, snapshot) {
             if (snapshot.hasData && snapshot.data.documents.length > 0) {
